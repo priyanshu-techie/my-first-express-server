@@ -1,0 +1,2 @@
+here i have created both the server and the client side code 
+index.js is the server and else are client
