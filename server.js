@@ -2,7 +2,8 @@
 
 let express = require('express');
 let app = express();
-let PORT = 8000;
+let PORT = process.env.PORT || 8000;
+let cors=require('cors')
 let SingersList = {
     'sonu nigam': [
         '1. Abhi Mujh Mein Kahin (Agneepath)',
@@ -63,9 +64,10 @@ let SingersList = {
         'Ab Raat अब रात – Dobaara'
     ]
 }
+// this is to remove the CORS error which shows up when you transfer data from local to local
+app.use(cors());
 
-
-// this line below is done because i want to run the script.js file and i dont know how it works so dont bother it for now you will know later on so have patience and enjoy
+// this line below is done because i want to run the client.js file and i dont know how it works so dont bother it for now you will know later on so have patience and enjoy
 app.use(express.static(__dirname));
 
 app.get('/', (req, res) => {
@@ -88,4 +90,4 @@ app.get('/api/:singerName/:index', (req, res) => {
     res.json(SingersList[singerName][index]);
 })
 
-
+// add an error method when user writes a wrong input in the url both for direct url and wrong index , print no data found 
